@@ -1,0 +1,108 @@
+<script lang="ts">
+	export let courses: Course[];
+	export let selected: Course | null = null;
+
+	let input = '';
+
+	$: filteredCourses = input
+		? courses
+				.filter(
+					(course) =>
+						input.length >= 3 && fullname(course).toLowerCase().includes(input.toLowerCase())
+				)
+				.slice(0, 10)
+		: [];
+	$: if (filteredCourses.length) highlit = 0;
+
+	let highlit = 0;
+
+	const segmentIndex = (text: string, search: string) =>
+		text.toLowerCase().search(search.toLowerCase());
+
+	const fullname = (course: Course) =>
+		`${course.info.area}${course.info.code}: ${course.info.name}`;
+
+	const keyNav = (key: string) => {
+		switch (key) {
+			case 'ArrowDown':
+				highlit++;
+				highlit %= filteredCourses.length;
+				break;
+			case 'ArrowUp':
+				highlit--;
+				if (highlit < 0) highlit = filteredCourses.length - 1;
+				break;
+			case 'Enter':
+				onSelect();
+				break;
+			case 'Tab':
+				onSelect();
+				break;
+
+			default:
+				break;
+		}
+	};
+
+	const onSelect = () => {
+		selected = filteredCourses[highlit];
+		input = fullname(selected);
+		window.blur();
+	};
+</script>
+
+<div class="wrapper">
+	<input
+		type="text"
+		bind:value={input}
+		on:focus={() => (input = '')}
+		on:keydown={(e) => keyNav(e.key)}
+	/>
+	{#if filteredCourses.length > 1}
+		<div class="list">
+			{#each filteredCourses as c, i}
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
+				<div
+					on:click={onSelect}
+					on:mouseenter={() => (highlit = i)}
+					class="{i == highlit ? 'highlit' : ''} list-item"
+				>
+					<!-- {fullname(c)} -->
+					{fullname(c).substring(0, segmentIndex(fullname(c), input))}<strong
+						>{fullname(c).substring(
+							segmentIndex(fullname(c), input),
+							segmentIndex(fullname(c), input) + input.length
+						)}</strong
+					>{fullname(c).substring(segmentIndex(fullname(c), input) + input.length)}
+				</div>
+			{/each}
+		</div>
+	{/if}
+</div>
+
+<style>
+	.wrapper {
+		width: 250px;
+		position: relative;
+	}
+	.wrapper > * {
+		width: 100%;
+	}
+	.list {
+		background-color: white;
+		border: 1px solid rgb(178, 178, 178);
+		position: absolute;
+		top: 100%;
+		z-index: 10;
+	}
+	.list-item {
+		overflow: hidden;
+		text-wrap: nowrap;
+		text-overflow: ellipsis;
+		padding: 2px 4px;
+		cursor: pointer;
+	}
+	.highlit {
+		background-color: rgb(178, 178, 178);
+	}
+</style>

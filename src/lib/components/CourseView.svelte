@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let course: Course;
-	let { info, prereqs, outcomes, weights } = course;
+	$: ({ info, prereqs, outcomes, weights } = course);
 </script>
 
 <h2>{info.area}{info.code}: {info.name}</h2>
@@ -8,13 +8,19 @@
 	<h3>Level</h3>
 	<p>{info.level}</p>
 	<h3>Prerequisites</h3>
-	{#each prereqs as prereq}
-		<p>{prereq.area}{prereq.code}: {prereq.name}</p>
-	{/each}
+	{#if prereqs.length === 0}
+		<p>None</p>
+	{:else}
+		{#each prereqs as prereq}
+			<p>{prereq.area}{prereq.code}: {prereq.name}</p>
+		{/each}
+	{/if}
 	<h3>Description</h3>
 	<p>{info.description}</p>
-	<h3>Parameters</h3>
-	<p>{info.parameters}</p>
+	{#if info.parameters}
+		<h3>Parameters</h3>
+		<p>{info.parameters}</p>
+	{/if}
 </div>
 <div>
 	<h3>Combined Outcome Weights</h3>
