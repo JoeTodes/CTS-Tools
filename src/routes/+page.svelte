@@ -11,7 +11,10 @@
 
 <!-- <input type="number" bind:value={courseIndex} /> -->
 
-<SearchAutoComplete {courses} bind:selected={selectedCourse} />
+<div class="flex space-x-2 my-4">
+	<label for="search-autocomplete-input">Module Search:</label>
+	<SearchAutoComplete {courses} bind:selected={selectedCourse} />
+</div>
 {#if selectedCourse}
 	<CourseView course={selectedCourse} />
 {/if}

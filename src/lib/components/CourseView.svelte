@@ -24,22 +24,22 @@
 		</div>
 	</div>
 </div>
-<h3>Description</h3>
+<h3>Description:</h3>
 <p>{info.description}</p>
 {#if info.parameters}
-	<h3>Parameters</h3>
+	<h3>Parameters:</h3>
 	<p>{info.parameters}</p>
 {/if}
 <div>
-	<h3>Combined Outcome Weights</h3>
+	<h3>Combined Outcome Weights:</h3>
 	{#each weights as weight}
 		<p class={`bg-${weight.outcomeName?.toLowerCase()} bg-opacity-70 w-32`}>
 			CO{weight.outcome}:{weight.outcomeName}: {weight.value}%
 		</p>
 	{/each}
 </div>
-<div class="max-w-2xl">
-	<h3>Outcomes</h3>
+<div class="w-full">
+	<h3>Outcomes:</h3>
 	{#if outcomes}
 		{#each outcomes as outcome}
 			<Accordion hasContent={outcome.specifics.length > 0} theme={outcome.combinedOutcome}>
