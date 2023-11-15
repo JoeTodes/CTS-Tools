@@ -11,5 +11,5 @@ export default {
 		}
 	},
 	plugins: [],
-	safelist: ['bg-coral', 'bg-cadetblue', 'bg-palegoldenrod']
+	safelist: ['bg-pae', 'bg-ku', 'bg-ccc']
 };

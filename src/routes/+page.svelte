@@ -9,7 +9,7 @@
 </script>
 
 <!-- <input type="number" bind:value={courseIndex} /> -->
-{#if courses}
+{#if courses.length > 0}
 	<div class="flex space-x-2 my-4">
 		<label for="search-autocomplete-input">Module Search:</label>
 		<SearchAutoComplete {courses} bind:selected={selectedCourse} />
