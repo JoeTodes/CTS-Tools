@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Accordion from '$lib/components/Accordion.svelte';
 	import CourseView from '$lib/components/CourseView.svelte';
 	import SearchAutoComplete from '$lib/components/SearchAutoComplete.svelte';
 	import type { PageData } from './$types';
@@ -10,11 +9,14 @@
 </script>
 
 <!-- <input type="number" bind:value={courseIndex} /> -->
-
-<div class="flex space-x-2 my-4">
-	<label for="search-autocomplete-input">Module Search:</label>
-	<SearchAutoComplete {courses} bind:selected={selectedCourse} />
-</div>
-{#if selectedCourse}
-	<CourseView course={selectedCourse} />
+{#if courses}
+	<div class="flex space-x-2 my-4">
+		<label for="search-autocomplete-input">Module Search:</label>
+		<SearchAutoComplete {courses} bind:selected={selectedCourse} />
+	</div>
+	{#if selectedCourse}
+		<CourseView course={selectedCourse} />
+	{/if}
+{:else}
+	<p>Loading...</p>
 {/if}
