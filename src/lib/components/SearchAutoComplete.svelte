@@ -63,6 +63,7 @@
 		}}
 		on:keydown={(e) => keyNav(e.key)}
 		class="border-black border-2 rounded-md"
+		placeholder="begin typing course name, number, or area"
 	/>
 	{#if filteredCourses.length > 0 && show}
 		<div class="list">
@@ -88,7 +89,7 @@
 
 <style>
 	.wrapper {
-		width: 250px;
+		width: 350px;
 		position: relative;
 	}
 	.wrapper > * {
