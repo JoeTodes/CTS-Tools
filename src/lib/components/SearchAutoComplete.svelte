@@ -10,9 +10,15 @@
 					(course) =>
 						input.length >= 3 && fullname(course).toLowerCase().includes(input.toLowerCase())
 				)
-				.slice(0, 10)
-		: [];
+				.sort((a, b) => {
+					if (a.info.area.toLowerCase() == input.substring(0, 3).toLowerCase()) return -1;
+					if (b.info.area.toLowerCase() == input.substring(0, 3).toLowerCase()) return 1;
+					return 0;
+				})
+		: // .slice(0, 10)
+		  [];
 	$: if (filteredCourses.length) highlit = 0;
+	$: console.log(filteredCourses);
 
 	let highlit = 0;
 
@@ -66,7 +72,7 @@
 		placeholder="begin typing course name, number, or area"
 	/>
 	{#if filteredCourses.length > 0 && show}
-		<div class="list">
+		<div class="list max-h-96 overflow-y-scroll">
 			{#each filteredCourses as c, i}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div
@@ -101,6 +107,21 @@
 		position: absolute;
 		top: 100%;
 		z-index: 10;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #888;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #555;
 	}
 	.list-item {
 		overflow: hidden;
