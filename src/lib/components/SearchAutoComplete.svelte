@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let courses: Course[];
 	export let selected: Course | null = null;
-
+	let show = true;
 	let input = '';
 
 	$: filteredCourses = input
@@ -47,18 +47,24 @@
 	const onSelect = () => {
 		selected = filteredCourses[highlit];
 		input = fullname(selected);
-		window.blur();
+		document.getElementById('search-autocomplete-input')?.blur();
+		show = false;
 	};
 </script>
 
 <div class="wrapper">
 	<input
+		id="search-autocomplete-input"
 		type="text"
 		bind:value={input}
-		on:focus={() => (input = '')}
+		on:focus={() => {
+			input = '';
+			show = true;
+		}}
 		on:keydown={(e) => keyNav(e.key)}
+		class="border-black border-2 rounded-md"
 	/>
-	{#if filteredCourses.length > 1}
+	{#if filteredCourses.length > 0 && show}
 		<div class="list">
 			{#each filteredCourses as c, i}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->

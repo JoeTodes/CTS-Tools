@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Accordion from '$lib/components/Accordion.svelte';
 	import CourseView from '$lib/components/CourseView.svelte';
 	import SearchAutoComplete from '$lib/components/SearchAutoComplete.svelte';
 	import type { PageData } from './$types';
