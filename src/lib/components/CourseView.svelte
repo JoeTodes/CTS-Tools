@@ -1,6 +1,11 @@
 <script lang="ts">
 	import Accordion from './Accordion.svelte';
 
+	let generals: Accordion[] = [];
+	let specifics: Accordion[] = [];
+	let expandAll = true;
+	let correctionFormURL =
+		'https://docs.google.com/forms/d/e/1FAIpQLSf2T6JESS_0Tv7udQHf3XgPZwZeXnDqwC54nwirOl3yQAfVfA/viewform?usp=sf_link';
 	export let course: Course;
 	$: ({ info, prereqs, outcomes, weights } = course);
 </script>
@@ -40,15 +45,37 @@
 </div>
 <div class="w-full">
 	<h3>Outcomes:</h3>
+	<div class="flex justify-between">
+		<p class="text-slate-500">
+			*Combined Outcome assignments are a work in progress. Please use <a
+				class="visited:text-indigo-500 text-blue-500 underline"
+				href={correctionFormURL}
+				target="_blank">this form</a
+			> to suggest corrections
+		</p>
+		<button
+			on:click={() => {
+				expandAll = !expandAll;
+				generals.forEach((a) => {
+					a.collapsed = expandAll;
+				});
+				specifics.filter((s) => s).forEach((s) => (s.collapsed = expandAll));
+			}}>{expandAll ? 'expand' : 'collapse'} all</button
+		>
+	</div>
 	{#if outcomes}
-		{#each outcomes as outcome}
-			<Accordion hasContent={outcome.specifics.length > 0} theme={outcome.combinedOutcome}>
+		{#each outcomes as outcome, i}
+			<Accordion
+				bind:this={generals[i]}
+				hasContent={outcome.specifics.length > 0}
+				theme={outcome.combinedOutcome}
+			>
 				<div slot="text">
 					{outcome.num}. {outcome.text} -- {outcome.combinedOutcome}
 				</div>
 				<div slot="content">
-					{#each outcome.specifics as specific}
-						<Accordion hasContent={specific.subs.length > 0}>
+					{#each outcome.specifics as specific, j}
+						<Accordion bind:this={specifics[i * 10 + j]} hasContent={specific.subs.length > 0}>
 							<div slot="text">
 								{specific.general}.{specific.num}
 								{specific.text}
