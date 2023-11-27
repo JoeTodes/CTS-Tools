@@ -11,8 +11,8 @@
 						input.length >= 3 && fullname(course).toLowerCase().includes(input.toLowerCase())
 				)
 				.sort((a, b) => {
-					if (a.info.area.toLowerCase() == input.substring(0, 3).toLowerCase()) return -1;
 					if (b.info.area.toLowerCase() == input.substring(0, 3).toLowerCase()) return 1;
+					if (a.info.area.toLowerCase() == input.substring(0, 3).toLowerCase()) return -1;
 					return 0;
 				})
 		: // .slice(0, 10)

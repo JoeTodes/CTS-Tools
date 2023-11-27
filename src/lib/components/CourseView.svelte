@@ -48,7 +48,7 @@
 	<div class="flex justify-between">
 		<p class="text-slate-500">
 			*Combined Outcome assignments are a work in progress. Please use <a
-				class="visited:text-indigo-500 text-blue-500 underline"
+				class="visited:text-purple-500 text-blue-500 underline"
 				href={correctionFormURL}
 				target="_blank">this form</a
 			> to suggest corrections
