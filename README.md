@@ -5,16 +5,24 @@ The beginning of a planned suite of tools for CBE (and Alberta) teachers to navi
 ## Currently Implemented
 
 :heavy_check_mark: Single Credit Course Viewer
+
 :heavy_check_mark: Autocomplete Searchbar Prioritizing Course Codes and Numbers
+
 :heavy_check_mark: CBE Combined Outcome Annotations and Highlighting
+
 
 ## Planned Features
 
 :clipboard: Full Filter Box
+
 :clipboard: Course Progression Planner
+
 :clipboard: User Accounts to Favorite Courses and Save Course Progressions
+
 :clipboard: User Generated Resource Repository
+
 :clipboard: Rubric Builder (export to D2L importable)
+
 
 ## Developing
 
