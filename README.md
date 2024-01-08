@@ -1,18 +1,20 @@
-# create-svelte
+# CTS-Tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+The beginning of a planned suite of tools for CBE (and Alberta) teachers to navigate CTS single credit courses and plan their course combinations
 
-## Creating a project
+## Currently Implemented
 
-If you're seeing this, you've probably already done this step. Congrats!
+:heavy_check_mark: Single Credit Course Viewer
+:heavy_check_mark: Autocomplete Searchbar Prioritizing Course Codes and Numbers
+:heavy_check_mark: CBE Combined Outcome Annotations and Highlighting
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Planned Features
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+:clipboard: Full Filter Box
+:clipboard: Course Progression Planner
+:clipboard: User Accounts to Favorite Courses and Save Course Progressions
+:clipboard: User Generated Resource Repository
+:clipboard: Rubric Builder (export to D2L importable)
 
 ## Developing
 
